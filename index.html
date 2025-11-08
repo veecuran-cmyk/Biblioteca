@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistema de Biblioteca</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+</head>
+<body>
+
+    <div id="captcha-modal" class="modal-overlay">
+        <div class="modal-content">
+            <h2>Verificação de Segurança</h2>
+            <p>Por favor, complete a verificação para continuar.</p>
+            <form id="captcha-form">
+                <div class="captcha-box">
+                    <input type="checkbox" id="captcha-check" required>
+                    <label for="captcha-check">Eu não sou um robô</label>
+                </div>
+                <button type="submit" class="btn btn-primary">Acessar Sistema</button>
+            </form>
+        </div>
+    </div>
+
+    <div id="app-container" style="display: none;">
+        <header>
+            <h1><i class="fa-solid fa-book-bookmark"></i> Sistema de Biblioteca</h1>
+        </header>
+
+        <nav class="nav-bar">
+            <button class="nav-button active" onclick="showView('view-inventario')"><i class="fa-solid fa-boxes-stacked"></i> Inventário</button>
+            <button class="nav-button" onclick="showView('view-buscar')"><i class="fa-solid fa-magnifying-glass"></i> Buscar Livro</button>
+            <button class="nav-button" onclick="showView('view-emprestimo')"><i class="fa-solid fa-right-left"></i> Empréstimo/Devolução</button>
+            <button class="nav-button" onclick="showView('view-contas')"><i class="fa-solid fa-users"></i> Contas de Usuários</button>
+        </nav>
+
+        <main>
+            <section id="view-inventario" class="view active">
+                <div class="panel">
+                    <h2><i class="fa-solid fa-book-medical"></i> Cadastrar Novo Livro</h2>
+                    <form id="form-add-book">
+                        <div class="form-group">
+                            <label for="livro-titulo">Título</label>
+                            <input type="text" id="livro-titulo" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="livro-autor">Autor</label>
+                            <input type="text" id="livro-autor" required>
+                        </div>
+                        <button type="submit" class="btn btn-success">Catalogar Livro</button>
+                    </form>
+                </div>
+                <div class="panel">
+                    <h2><i class="fa-solid fa-list-ul"></i> Inventário Atual</h2>
+                    <div id="lista-livros-inventario" class="table-container">
+                    </div>
+                </div>
+            </section>
+
+            <section id="view-buscar" class="view">
+                <div class="panel">
+                    <h2><i class="fa-solid fa-search"></i> Pesquisar Livro</h2>
+                    <form id="form-search-book">
+                        <div class="form-group">
+                            <label for="search-term">Buscar por ID, Título ou Autor</label>
+                            <input type="text" id="search-term" required>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Buscar</button>
+                    </form>
+                </div>
+                <div class="panel">
+                    <h2>Resultados da Busca</h2>
+                    <div id="search-results" class="table-container">
+                        <p>Digite um termo e clique em "Buscar" para ver os resultados.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section id="view-emprestimo" class="view">
+                <div class="panel">
+                    <h2><i class="fa-solid fa-right-left"></i> Registrar Empréstimo ou Devolução</h2>
+                    <form id="form-emprestimo-devolucao">
+                        <div class="form-group">
+                            <label for="emprestimo-livro-id">ID do Livro</label>
+                            <input type="text" id="emprestimo-livro-id" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="emprestimo-usuario-id">ID do Usuário (apenas para empréstimo)</label>
+                            <input type="text" id="emprestimo-usuario-id">
+                        </div>
+                        <div class="button-group">
+                            <button type="button" id="btn-emprestar" class="btn btn-success">Emprestar</button>
+                            <button type="button" id="btn-devolver" class="btn btn-warning">Devolver</button>
+                        </div>
+                    </form>
+                </div>
+            </section>
+
+            <section id="view-contas" class="view">
+                <div class="panel">
+                    <h2><i class="fa-solid fa-user-plus"></i> Cadastrar Novo Usuário</h2>
+                    <form id="form-add-user">
+                        <div class="form-group">
+                            <label for="usuario-nome">Nome do Usuário</label>
+                            <input type="text" id="usuario-nome" required>
+                        </div>
+                        <button type="submit" class="btn btn-success">Cadastrar Usuário</button>
+                    </form>
+                </div>
+                <div class="panel">
+                    <h2><i class="fa-solid fa-users-cog"></i> Usuários Cadastrados</h2>
+                    <div id="lista-usuarios" class="table-container">
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
